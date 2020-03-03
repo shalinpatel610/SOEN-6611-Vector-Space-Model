@@ -2,6 +2,7 @@ import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.pipeline.CoreDocument;
 import edu.stanford.nlp.pipeline.CoreSentence;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.*;
 import java.util.*;
@@ -120,9 +121,13 @@ public class JavaClass{
      */
     private List<String> splitIdentifiers(String tokenLemma){
         List<String> splitTokens = new ArrayList<>();
-        for (String w : tokenLemma.split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])|(?=([0-9]))")) {
+        /*for (String w : tokenLemma.split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])|(?=([0-9]))")) {
             splitTokens.add(w);
-        }
+            // Same result as StringUtils.splitByCharacterTypeCamelCase();
+        }*/
+
+        String[] splits = StringUtils.splitByCharacterTypeCamelCase(tokenLemma);
+        splitTokens.addAll(Arrays.asList(splits));
         return splitTokens;
     }
 
