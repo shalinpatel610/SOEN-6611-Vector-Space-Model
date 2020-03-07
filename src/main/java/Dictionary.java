@@ -65,7 +65,7 @@ public class Dictionary {
         Hashtable<String, Double> idfs = new Hashtable<>();
         Hashtable<String, Set<String>> invertedIndex = getInvertedIndex();
         for (String term : invertedIndex.keySet()){
-            double idf = Math.log((numberOfDocs/invertedIndex.get(term).size()));
+            double idf = Math.log(((double)numberOfDocs / (double)invertedIndex.get(term).size()));
             idfs.put(term, idf);
         }
         //System.out.println(idfs.toString());
